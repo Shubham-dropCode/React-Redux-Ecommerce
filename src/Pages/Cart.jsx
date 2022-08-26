@@ -1,11 +1,21 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import { getNodeText } from '@testing-library/react';
+import { useSelector, useDispatch } from 'react-redux';
+import { remove } from '../store/CartSlice';
 
 const Cart = () => {
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.cart);
+    const handleRemove = (productId) => {
+        dispatch(remove(productId));
+    };
+
     return (
         <React.Fragment>
-            <div id="preloder">
+            {/* <div id="preloder">
                 <div className="loader"></div>
-            </div>
+            </div> */}
 
             <div className="humberger__menu__overlay"></div>
             <div className="humberger__menu__wrapper">
@@ -65,10 +75,10 @@ const Cart = () => {
             </div>
 
             <header className="header">
-                <div className="header__top">
+                {/* <div className="header__top">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6">
                                 <div className="header__top__left">
                                     <ul>
                                         <li><i className="fa fa-envelope"></i> hello@colorlib.com</li>
@@ -76,7 +86,7 @@ const Cart = () => {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6">
                                 <div className="header__top__right">
                                     <div className="header__top__right__social">
                                         <a href="#"><i className="fa fa-facebook"></i></a>
@@ -100,20 +110,20 @@ const Cart = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3">
                             <div className="header__logo">
-                                <a href="./index.html"><img src="../assets/img/logo.png" alt="" /></a>
+                                <Link to="/"><img src="../assets/img/logo.png" alt="" /></Link>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <nav className="header__menu">
+                            <nav className="header__menu d-flex align-item-center justify-content-center">
                                 <ul>
-                                    <li><a href="./index.html">Home</a></li>
-                                    <li className="active"><a href="./shop-grid.html">Shop</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li className="active"><Link to="/">Home</Link></li>
+                                    <li><Link to="./Cart">Cart</Link></li>
+                                    {/* <li><a href="#">Pages</a>
                                         <ul className="header__menu__dropdown">
                                             <li><a href="./shop-details.html">Shop Details</a></li>
                                             <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -122,17 +132,17 @@ const Cart = () => {
                                         </ul>
                                     </li>
                                     <li><a href="./blog.html">Blog</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li><a href="./contact.html">Contact</a></li> */}
                                 </ul>
                             </nav>
                         </div>
                         <div className="col-lg-3">
                             <div className="header__cart">
                                 <ul>
-                                    <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
-                                    <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                                    <li><a href="#"><i className="fa fa-heart"></i> <span>0</span></a></li>
+                                    <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>0</span></a></li>
                                 </ul>
-                                <div className="header__cart__price">item: <span>$150.00</span></div>
+                                {/* <div className="header__cart__price">item: <span>$150.00</span></div> */}
                             </div>
                         </div>
                     </div>
@@ -193,7 +203,7 @@ const Cart = () => {
                 </div>
             </section>
 
-            <section className="breadcrumb-section set-bg" data-setbg="../assets/img/breadcrumb.jpg">
+            {/* <section className="breadcrumb-section set-bg" data-setbg="../assets/img/breadcrumb.jpg">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12 text-center">
@@ -207,7 +217,7 @@ const Cart = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <section className="shoping-cart spad">
                 <div className="container">

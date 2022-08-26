@@ -178,7 +178,7 @@ ol {
 	text-transform: uppercase;
 	display: inline-block;
 	padding: 13px 30px 12px;
-	background: #7fad39;
+	background: #802c6e;
 	border: none;
 }
 
@@ -449,7 +449,7 @@ ol {
 }
 
 .header__menu ul li .header__menu__dropdown li:hover>a {
-	color: #7fad39;
+	color: #802c6e;
 }
 
 .header__menu ul li .header__menu__dropdown li a {
@@ -460,7 +460,7 @@ ol {
 }
 
 .header__menu ul li.active a {
-	color: #7fad39;
+	color: #802c6e;
 }
 
 .header__menu ul li:hover .header__menu__dropdown {
@@ -470,7 +470,7 @@ ol {
 }
 
 .header__menu ul li:hover>a {
-	color: #7fad39;
+	color: #802c6e;
 }
 
 .header__menu ul li:last-child {
@@ -587,7 +587,7 @@ ol {
 }
 
 .hero__categories__all {
-	background: #7fad39;
+	background: #802c6e;
 	position: relative;
 	padding: 10px 25px 10px 40px;
 	cursor: pointer;
@@ -700,7 +700,7 @@ ol {
 
 .hero__search__phone__icon {
 	font-size: 18px;
-	color: #7fad39;
+	color: #802c6e;
 	height: 50px;
 	width: 50px;
 	background: #f5f5f5;

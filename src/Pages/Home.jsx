@@ -1,11 +1,47 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Link } from "react-router-dom";
+import data from "../Content.json"
+import { useDispatch, useSelector } from 'react-redux';
+import { add } from '../store/CartSlice';
+import { fetchProducts } from '../store/productSlice';
+import { STATUSES } from '../store/productSlice';
+
+
 
 const Home = () => {
+    const dispatch = useDispatch();
+    const items = useSelector((state) => state.cart);
+    const { data: products, status } = useSelector((state) => state.product);
+    // const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        dispatch(fetchProducts());
+        // const fetchProducts = async () => {
+        //     const res = await fetch('https://fakestoreapi.com/products');
+        //     const data = await res.json();
+        //     console.log(data);
+        //     setProducts(data);
+        // };
+        // fetchProducts();
+    }, []);
+
+    const handleAdd = (product) => {
+        dispatch(add(product));
+    };
+
+    if (status === STATUSES.LOADING) {
+        return <h2>Loading....</h2>;
+    }
+
+    if (status === STATUSES.ERROR) {
+        return <h2>Something went wrong!</h2>;
+    }
+
     return (
         <React.Fragment>
-            <div id="preloder">
+            {/* <div id="preloder">
                 <div className="loader"></div>
-            </div>
+            </div> */}
 
 
             <div className="humberger__menu__overlay"></div>
@@ -65,8 +101,8 @@ const Home = () => {
                 </div>
             </div>
 
-            <header className="header">
-                <div className="header__top">
+            <header className="header sticky-top bg-light">
+                {/* <div className="header__top">
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-6 col-md-6">
@@ -101,20 +137,20 @@ const Home = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3">
                             <div className="header__logo">
-                                <a href="./index.html"><img src="../assets/img/logo.png" alt="" /></a>
+                                <Link to="/"><img src="../assets/img/logo.png" alt="" /></Link>
                             </div>
                         </div>
                         <div className="col-lg-6">
-                            <nav className="header__menu">
+                            <nav className="header__menu d-flex align-item-center justify-content-center">
                                 <ul>
-                                    <li className="active"><a href="./index.html">Home</a></li>
-                                    <li><a href="./shop-grid.html">Shop</a></li>
-                                    <li><a href="#">Pages</a>
+                                    <li className="active"><Link to="/">Home</Link></li>
+                                    <li><Link to="./Cart">Cart</Link></li>
+                                    {/* <li><a href="#">Pages</a>
                                         <ul className="header__menu__dropdown">
                                             <li><a href="./shop-details.html">Shop Details</a></li>
                                             <li><a href="./shoping-cart.html">Shoping Cart</a></li>
@@ -123,17 +159,17 @@ const Home = () => {
                                         </ul>
                                     </li>
                                     <li><a href="./blog.html">Blog</a></li>
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li><a href="./contact.html">Contact</a></li> */}
                                 </ul>
                             </nav>
                         </div>
                         <div className="col-lg-3">
                             <div className="header__cart">
                                 <ul>
-                                    <li><a href="#"><i className="fa fa-heart"></i> <span>1</span></a></li>
-                                    <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                                    <li><a href="#"><i className="fa fa-heart"></i> <span>0</span></a></li>
+                                    <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>{items.length}</span></a></li>
                                 </ul>
-                                <div className="header__cart__price">item: <span>$150.00</span></div>
+                                {/* <div className="header__cart__price">item: <span>$150.00</span></div> */}
                             </div>
                         </div>
                     </div>
@@ -171,10 +207,10 @@ const Home = () => {
                             <div className="hero__search">
                                 <div className="hero__search__form">
                                     <form action="#">
-                                        <div className="hero__search__categories">
+                                        {/* <div className="hero__search__categories">
                                             All Categories
                                             <span className="arrow_carrot-down"></span>
-                                        </div>
+                                        </div> */}
                                         <input type="text" placeholder="What do yo u need?" />
                                         <button type="submit" className="site-btn">SEARCH</button>
                                     </form>
@@ -184,12 +220,12 @@ const Home = () => {
                                         <i className="fa fa-phone"></i>
                                     </div>
                                     <div className="hero__search__phone__text">
-                                        <h5>+65 11.188.888</h5>
+                                        <h5>+XXXXXXXXX</h5>
                                         <span>support 24/7 time</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className="hero__item set-bg" data-setbg="../assets/img/hero/banner.jpg">
+                            <div className="hero__item set-bg" style={{ backgroundImage: "url(../assets/img/hero/banner.jpg)" }}>
                                 <div className="hero__text">
                                     <span>FRUIT FRESH</span>
                                     <h2>Vegetable <br />100% Organic</h2>
@@ -207,7 +243,8 @@ const Home = () => {
                     <div className="row">
                         <div className="categories__slider owl-carousel">
                             <div className="col-lg-3">
-                                <div className="categories__item set-bg" data-setbg="../assets/img/categories/cat-1.jpg">
+                                <div className="categories__item set-bg" data-setbg="">
+                                    <img className="set-bg" src="../assets/img/categories/cat-1.jpg" alt="" />
                                     <h5><a href="#">Fresh Fruit</a></h5>
                                 </div>
                             </div>
@@ -245,32 +282,36 @@ const Home = () => {
                             </div>
                             <div className="featured__controls">
                                 <ul>
-                                    <li className="active" data-filter="*">All</li>
-                                    <li data-filter=".oranges">Oranges</li>
-                                    <li data-filter=".fresh-meat">Fresh Meat</li>
-                                    <li data-filter=".vegetables">Vegetables</li>
-                                    <li data-filter=".fastfood">Fastfood</li>
+                                    <li className="active" data-filter="*"><strong>All</strong></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div className="row featured__filter">
-                        <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                            <div className="featured__item">
-                                <div className="featured__item__pic set-bg" data-setbg="../assets/img/featured/feature-1.jpg">
-                                    <ul className="featured__item__pic__hover">
-                                        <li><a href="#"><i className="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                        <li><a href="#"><i className="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
+
+
+                        {data.map((product) => {
+                            return (
+
+                                <div className="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                                    <div className="featured__item" key={product.id}>
+                                        <div className="featured__item__pic set-bg" style={{ backgroundImage: `url(${product.image})` }}>
+                                            <ul className="featured__item__pic__hover">
+                                                <li><a href="#"><i className="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i className="fa fa-retweet"></i></a></li>
+                                                <li><a href="#"><i className="fa fa-shopping-cart" onClick={() => handleAdd(product)}></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div className="featured__item__text">
+                                            <h6><a href="#">{product.title}</a></h6>
+                                            <h5>₹{product.price}</h5>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="featured__item__text">
-                                    <h6><a href="#">Crab Pool Security</a></h6>
-                                    <h5>$30.00</h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
+                            )
+                        })}
+
+                        {/* <div className="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
                             <div className="featured__item">
                                 <div className="featured__item__pic set-bg" data-setbg="../assets/img/featured/feature-2.jpg">
                                     <ul className="featured__item__pic__hover">
@@ -359,10 +400,10 @@ const Home = () => {
                                     <h5>$30.00</h5>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-lg-3 col-md-4 col-sm-6 mix fastfood vegetables">
                             <div className="featured__item">
-                                <div className="featured__item__pic set-bg" data-setbg="../assets/img/featured/feature-8.jpg">
+                                <div className="featured__item__pic set-bg" style={{ backgroundImage: "url(../assets/img/featured/feature-8.jpg)" }}>
                                     <ul className="featured__item__pic__hover">
                                         <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                         <li><a href="#"><i className="fa fa-retweet"></i></a></li>
@@ -379,7 +420,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <div className="banner">
+            {/* <div className="banner">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6 col-md-6 col-sm-6">
@@ -394,9 +435,9 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
-            <section className="latest-product spad">
+            {/* <section className="latest-product spad">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4 col-md-6">
@@ -596,9 +637,9 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
-            <section className="from-blog spad">
+            {/* <section className="from-blog spad">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -655,7 +696,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             <footer className="footer spad">
                 <div className="container">
@@ -725,3 +766,55 @@ const Home = () => {
 }
 
 export default Home
+
+
+// import React, { useState, useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { add } from '../store/cartSlice';
+// import { fetchProducts } from '../store/productSlice';
+// import { STATUSES } from '../store/productSlice';
+
+// const Products = () => {
+//     const dispatch = useDispatch();
+//     const { data: products, status } = useSelector((state) => state.product);
+//     // const [products, setProducts] = useState([]);
+
+//     useEffect(() => {
+//         dispatch(fetchProducts());
+//         // const fetchProducts = async () => {
+//         //     const res = await fetch('https://fakestoreapi.com/products');
+//         //     const data = await res.json();
+//         //     console.log(data);
+//         //     setProducts(data);
+//         // };
+//         // fetchProducts();
+//     }, []);
+
+//     const handleAdd = (product) => {
+//         dispatch(add(product));
+//     };
+
+//     if (status === STATUSES.LOADING) {
+//         return <h2>Loading....</h2>;
+//     }
+
+//     if (status === STATUSES.ERROR) {
+//         return <h2>Something went wrong!</h2>;
+//     }
+//     return (
+//         <div className="productsWrapper">
+//             {products.map((product) => (
+//                 <div className="card" key={product.id}>
+//                     <img src={product.image} alt="" />
+//                     <h4>{product.title}</h4>
+//                     <h5>{product.price}</h5>
+//                     <button onClick={() => handleAdd(product)} className="btn">
+//                         Add to cart
+//                     </button>
+//                 </div>
+//             ))}
+//         </div>
+//     );
+// };
+
+// export default Products;
