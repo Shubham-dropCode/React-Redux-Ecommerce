@@ -1930,14 +1930,14 @@ ol {
 	font-size: 18px;
 	color: #1c1c1c;
 	font-weight: 700;
-	width: 100px;
+	/* width: 100px; */
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__total {
 	font-size: 18px;
 	color: #1c1c1c;
 	font-weight: 700;
-	width: 110px;
+	/* width: 110px; */
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__item__close {
@@ -1951,11 +1951,11 @@ ol {
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__quantity {
-	width: 225px;
+	/* width: 225px; */
 }
 
 .shoping__cart__table table tbody tr td.shoping__cart__quantity .pro-qty {
-	width: 120px;
+	/* width: 120px; */
 	height: 40px;
 }
 

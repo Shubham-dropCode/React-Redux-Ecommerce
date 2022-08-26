@@ -5,12 +5,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { add } from '../store/CartSlice';
 import { fetchProducts } from '../store/productSlice';
 import { STATUSES } from '../store/productSlice';
+import Navbar from '../Components/NavBar';
 
 
 
 const Home = () => {
+
+    const [toggle, setToggle] = useState(true)
+    // document.getElementByClassName("hero__categories__all").addEventListener('click', (e) => {
+    //     document.querySelectorAll(".hero__categories ul").slideToggle(400);
+    // });
     const dispatch = useDispatch();
-    const items = useSelector((state) => state.cart);
+
     const { data: products, status } = useSelector((state) => state.product);
     // const [products, setProducts] = useState([]);
 
@@ -24,6 +30,10 @@ const Home = () => {
         // };
         // fetchProducts();
     }, []);
+
+    // const catagories = [...new Map(data.catagories.map((m) => [m.id, m])).values()];
+    console.log(data);
+
 
     const handleAdd = (product) => {
         dispatch(add(product));
@@ -101,106 +111,38 @@ const Home = () => {
                 </div>
             </div>
 
-            <header className="header sticky-top bg-light">
-                {/* <div className="header__top">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6">
-                                <div className="header__top__left">
-                                    <ul>
-                                        <li><i className="fa fa-envelope"></i> hello@colorlib.com</li>
-                                        <li>Free Shipping for all Order of $99</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6">
-                                <div className="header__top__right">
-                                    <div className="header__top__right__social">
-                                        <a href="#"><i className="fa fa-facebook"></i></a>
-                                        <a href="#"><i className="fa fa-twitter"></i></a>
-                                        <a href="#"><i className="fa fa-linkedin"></i></a>
-                                        <a href="#"><i className="fa fa-pinterest-p"></i></a>
-                                    </div>
-                                    <div className="header__top__right__language">
-                                        <img src="../assets/img/language.png" alt="" />
-                                        <div>English</div>
-                                        <span className="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li><a href="#">Spanis</a></li>
-                                            <li><a href="#">English</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="header__top__right__auth">
-                                        <a href="#"><i className="fa fa-user"></i> Login</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-3">
-                            <div className="header__logo">
-                                <Link to="/"><img src="../assets/img/logo.png" alt="" /></Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <nav className="header__menu d-flex align-item-center justify-content-center">
-                                <ul>
-                                    <li className="active"><Link to="/">Home</Link></li>
-                                    <li><Link to="./Cart">Cart</Link></li>
-                                    {/* <li><a href="#">Pages</a>
-                                        <ul className="header__menu__dropdown">
-                                            <li><a href="./shop-details.html">Shop Details</a></li>
-                                            <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                            <li><a href="./checkout.html">Check Out</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="./blog.html">Blog</a></li>
-                                    <li><a href="./contact.html">Contact</a></li> */}
-                                </ul>
-                            </nav>
-                        </div>
-                        <div className="col-lg-3">
-                            <div className="header__cart">
-                                <ul>
-                                    <li><a href="#"><i className="fa fa-heart"></i> <span>0</span></a></li>
-                                    <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>{items.length}</span></a></li>
-                                </ul>
-                                {/* <div className="header__cart__price">item: <span>$150.00</span></div> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="humberger__open">
-                        <i className="fa fa-bars"></i>
-                    </div>
-                </div>
-            </header>
+            <Navbar />
+
+
 
             <section className="hero">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3">
-                            <div className="hero__categories">
-                                <div className="hero__categories__all">
+                            <div className="hero__categories dropdown">
+                                <div className="hero__categories__all" id="dropdownMenuButton">
                                     <i className="fa fa-bars"></i>
                                     <span>All departments</span>
                                 </div>
-                                <ul>
-                                    <li><a href="#">Fresh Meat</a></li>
-                                    <li><a href="#">Vegetables</a></li>
-                                    <li><a href="#">Fruit & Nut Gifts</a></li>
-                                    <li><a href="#">Fresh Berries</a></li>
+                                <ul aria-labelledby="dropdownMenuButton">
+                                    {data.map((product) => {
+
+                                        return (
+
+                                            <li><a href="/">{[...new Set(product.category)]}</a></li>
+                                        )
+
+                                    })}
+                                </ul>
+                                {/* <li><a href="#">Vegetables</a></li>
                                     <li><a href="#">Ocean Foods</a></li>
                                     <li><a href="#">Butter & Eggs</a></li>
                                     <li><a href="#">Fastfood</a></li>
                                     <li><a href="#">Fresh Onion</a></li>
                                     <li><a href="#">Papayaya & Crisps</a></li>
                                     <li><a href="#">Oatmeal</a></li>
-                                    <li><a href="#">Fresh Bananas</a></li>
-                                </ul>
+                                    <li><a href="#">Fresh Bananas</a></li> */}
+
                             </div>
                         </div>
                         <div className="col-lg-9">
@@ -225,10 +167,10 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="hero__item set-bg" style={{ backgroundImage: "url(../assets/img/hero/banner.jpg)" }}>
+                            <div className="hero__item set-bg" style={{ backgroundImage: "url(../assets/img/hero/tshirts.jpg)" }}>
                                 <div className="hero__text">
-                                    <span>FRUIT FRESH</span>
-                                    <h2>Vegetable <br />100% Organic</h2>
+                                    <span>MENS Ware</span>
+                                    <h2>Brand <br />100% Original</h2>
                                     <p>Free Pickup and Delivery Available</p>
                                     <a href="#" className="primary-btn">SHOP NOW</a>
                                 </div>
@@ -236,7 +178,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             <section className="categories">
                 <div className="container">
@@ -299,7 +241,7 @@ const Home = () => {
                                             <ul className="featured__item__pic__hover">
                                                 <li><a href="#"><i className="fa fa-heart"></i></a></li>
                                                 <li><a href="#"><i className="fa fa-retweet"></i></a></li>
-                                                <li><a href="#"><i className="fa fa-shopping-cart" onClick={() => handleAdd(product)}></i></a></li>
+                                                <li><a onClick={() => handleAdd(product)}><i className="fa fa-shopping-cart"></i></a></li>
                                             </ul>
                                         </div>
                                         <div className="featured__item__text">
@@ -761,7 +703,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            </footer></React.Fragment>
+            </footer></React.Fragment >
     )
 }
 

@@ -1,6 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const items = useSelector((state) => state.cart);
   return (
     <>
       <header className="header sticky-top bg-light">
@@ -80,10 +83,10 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="#">
+                    <Link to="/cart">
                       <i className="fa fa-shopping-bag"></i>{" "}
                       <span>{items.length}</span>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 {/* <div className="header__cart__price">item: <span>$150.00</span></div> */}

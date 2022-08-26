@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom'
 import { getNodeText } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { remove } from '../store/CartSlice';
+import Navbar from '../Components/NavBar';
+import data from "../Content.json"
 
 const Cart = () => {
+    console.log("🚀 ~ file: cart.jsx ~ line 8 ~ d̥ata", data)
+
     const dispatch = useDispatch();
     const products = useSelector((state) => state.cart);
     const handleRemove = (productId) => {
@@ -74,83 +78,7 @@ const Cart = () => {
                 </div>
             </div>
 
-            <header className="header">
-                {/* <div className="header__top">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-6 col-md-6">
-                                <div className="header__top__left">
-                                    <ul>
-                                        <li><i className="fa fa-envelope"></i> hello@colorlib.com</li>
-                                        <li>Free Shipping for all Order of $99</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div className="col-lg-6 col-md-6">
-                                <div className="header__top__right">
-                                    <div className="header__top__right__social">
-                                        <a href="#"><i className="fa fa-facebook"></i></a>
-                                        <a href="#"><i className="fa fa-twitter"></i></a>
-                                        <a href="#"><i className="fa fa-linkedin"></i></a>
-                                        <a href="#"><i className="fa fa-pinterest-p"></i></a>
-                                    </div>
-                                    <div className="header__top__right__language">
-                                        <img src="../assets/img/language.png" alt="" />
-                                        <div>English</div>
-                                        <span className="arrow_carrot-down"></span>
-                                        <ul>
-                                            <li><a href="#">Spanis</a></li>
-                                            <li><a href="#">English</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="header__top__right__auth">
-                                        <a href="#"><i className="fa fa-user"></i> Login</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-3">
-                            <div className="header__logo">
-                                <Link to="/"><img src="../assets/img/logo.png" alt="" /></Link>
-                            </div>
-                        </div>
-                        <div className="col-lg-6">
-                            <nav className="header__menu d-flex align-item-center justify-content-center">
-                                <ul>
-                                    <li className="active"><Link to="/">Home</Link></li>
-                                    <li><Link to="./Cart">Cart</Link></li>
-                                    {/* <li><a href="#">Pages</a>
-                                        <ul className="header__menu__dropdown">
-                                            <li><a href="./shop-details.html">Shop Details</a></li>
-                                            <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                            <li><a href="./checkout.html">Check Out</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="./blog.html">Blog</a></li>
-                                    <li><a href="./contact.html">Contact</a></li> */}
-                                </ul>
-                            </nav>
-                        </div>
-                        <div className="col-lg-3">
-                            <div className="header__cart">
-                                <ul>
-                                    <li><a href="#"><i className="fa fa-heart"></i> <span>0</span></a></li>
-                                    <li><a href="#"><i className="fa fa-shopping-bag"></i> <span>0</span></a></li>
-                                </ul>
-                                {/* <div className="header__cart__price">item: <span>$150.00</span></div> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="humberger__open">
-                        <i className="fa fa-bars"></i>
-                    </div>
-                </div>
-            </header>
+            <Navbar />
 
             <section className="hero hero-normal">
                 <div className="container">
@@ -219,88 +147,51 @@ const Cart = () => {
                 </div>
             </section> */}
 
-            <section className="shoping-cart spad">
+            <section className="shoping-cart">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="shoping__cart__table">
+                            <div className="shoping__cart__table    ">
                                 <table>
-                                    <thead>
+                                    <thead >
                                         <tr>
-                                            <th className="shoping__product">Products</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
+                                            <th className="shoping__product col-12">Products</th>
+                                            <th className='text-right pr-4'>Price</th>
+                                            {/* <th>Quantity</th>
                                             <th>Total</th>
-                                            <th></th>
+                                            <th></th> */}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td className="shoping__cart__item">
-                                                <img src="../assets/img/cart/cart-1.jpg" alt="" />
-                                                <h5>Vegetable’s Package</h5>
-                                            </td>
-                                            <td className="shoping__cart__price">
-                                                $55.00
-                                            </td>
-                                            <td className="shoping__cart__quantity">
-                                                <div className="quantity">
-                                                    <div className="pro-qty">
-                                                        <input type="text" value="1" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="shoping__cart__total">
-                                                $110.00
-                                            </td>
-                                            <td className="shoping__cart__item__close">
-                                                <span className="icon_close"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="shoping__cart__item">
-                                                <img src="../assets/img/cart/cart-2.jpg" alt="" />
-                                                <h5>Fresh Garden Vegetable</h5>
-                                            </td>
-                                            <td className="shoping__cart__price">
-                                                $39.00
-                                            </td>
-                                            <td className="shoping__cart__quantity">
-                                                <div className="quantity">
-                                                    <div className="pro-qty">
-                                                        <input type="text" value="1" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="shoping__cart__total">
-                                                $39.99
-                                            </td>
-                                            <td className="shoping__cart__item__close">
-                                                <span className="icon_close"></span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td className="shoping__cart__item">
-                                                <img src="../assets/img/cart/cart-3.jpg" alt="" />
-                                                <h5>Organic Bananas</h5>
-                                            </td>
-                                            <td className="shoping__cart__price">
-                                                $69.00
-                                            </td>
-                                            <td className="shoping__cart__quantity">
-                                                <div className="quantity">
-                                                    <div className="pro-qty">
-                                                        <input type="text" value="1" />
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td className="shoping__cart__total">
-                                                $69.99
-                                            </td>
-                                            <td className="shoping__cart__item__close">
-                                                <span className="icon_close"></span>
-                                            </td>
-                                        </tr>
+                                        {products.map((product) => {
+                                            return (
+                                                <tr className='' key={product.id}>
+                                                    <td className="shoping__cart__item "  >
+                                                        <img src={product.image} alt="" style={{ height: 100, Margin: 0 }} />
+                                                        <h5 className='pl-3'>{product.title}</h5>
+                                                    </td>
+                                                    <td className="shoping__cart__price text-center pr-3">
+                                                        ${product.price}
+                                                    </td>
+                                                    {/* <td className="shoping__cart__quantity">
+                                                        <div className="quantity">
+                                                            <div className="pro-qty">
+                                                                <input type="text" value="1" />
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td className="shoping__cart__total">
+                                                        $110.00
+                                                    </td> */}
+                                                    <td className="shoping__cart__item__close text-center">
+                                                        <span className="icon_close" onClick={() => handleRemove(product.id)}></span>
+                                                    </td>
+                                                </tr>
+
+                                            )
+                                        })}
+
+
                                     </tbody>
                                 </table>
                             </div>
